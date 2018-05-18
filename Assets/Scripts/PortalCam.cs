@@ -22,25 +22,16 @@ public class PortalCam : MonoBehaviour {
         return new Vector4(cnormal.x, cnormal.y, cnormal.z, -Vector3.Dot(cpos, cnormal));
     }
 
-
 	// Update is called once per frame
 	void Update () {
-		// Vector3 offset = enterPortal.transform.position - Camera.main.transform.position;
-		// transform.position = exitPortal.transform.position - offset;
-		// Vector3 angleOffset = enterPortal.transform.rotation - exitPortal.transform.rotation;
+		Quaternion rot180 = Quaternion.Euler(0, 180.0f, 0);
+		Vector3 localPos = enterPortal.transform.InverseTransformPoint(Camera.main.transform.position);
+		Vector3 rotatedPos = rot180 * localPos;
+		transform.position = exitPortal.transform.TransformPoint(rotatedPos);
+		transform.rotation = exitPortal.transform.rotation * rot180 * Quaternion.Inverse(enterPortal.transform.rotation) * Camera.main.transform.rotation;
 
-		// transform.RotateAround(exitPortal.transform.position, exitPortal.transform.up)
-
-		Quaternion Rot180 = Quaternion.Euler(0, 180.0f, 0);
-		Vector3 LocalPos = enterPortal.transform.InverseTransformPoint(Camera.main.transform.position);
-		// transform.position = LocalPos;
-		// transform.position = exitPortal.transform.TransformPoint(LocalPos);
-		Vector3 RotatedPos = Rot180 * LocalPos;
-		transform.position = exitPortal.transform.TransformPoint(RotatedPos);
-		transform.rotation = exitPortal.transform.rotation * Rot180 * Quaternion.Inverse(enterPortal.transform.rotation) * Camera.main.transform.rotation;
-	
 		Camera cam = gameObject.GetComponent<Camera>();
-		Vector4 ClipPlane = CameraSpacePlane(cam.worldToCameraMatrix, exitPortal.transform.position, exitPortal.transform.TransformDirection(Vector3.left), 1.0f);
-		cam.projectionMatrix = Camera.main.CalculateObliqueMatrix(ClipPlane);
+		Vector4 clipPlane = CameraSpacePlane(cam.worldToCameraMatrix, exitPortal.transform.position, exitPortal.transform.TransformDirection(Vector3.left), 1.0f);
+		cam.projectionMatrix = Camera.main.CalculateObliqueMatrix(clipPlane);
 	}
 }
