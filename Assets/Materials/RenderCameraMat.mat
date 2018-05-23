@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: RenderCameraMat
-  m_Shader: {fileID: 4800000, guid: ededd583a0b1ccd40be8ddaf1d8aa4b0, type: 3}
+  m_Shader: {fileID: 4800000, guid: 15dd6329c8d69a0479fffb8c044762ae, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
