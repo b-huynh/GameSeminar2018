@@ -39,7 +39,7 @@ public class PortalTeleporter : MonoBehaviour {
 
         }
 
-        if (rotateFlag)
+        /*if (rotateFlag)
         {
             if (Mathf.Abs(reciever.rotation.x - player.rotation.x) > 0.1)
             {
@@ -55,7 +55,7 @@ public class PortalTeleporter : MonoBehaviour {
                     rotateFlag = false;
                 }
             }
-        }
+        }*/
     }
 
     void OnTriggerEnter (Collider other)
