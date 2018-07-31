@@ -16,7 +16,7 @@ public class DisableOutOfView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (IsInView()) {
+		if (IsInView() && IsClose()) {
 			EnablePortalRendering();
 		} else {
 			DisablePortalRendering();
@@ -51,5 +51,10 @@ public class DisableOutOfView : MonoBehaviour {
 		Vector3 center = rend.bounds.center;
 		Vector3 cameraPoint = Camera.main.WorldToViewportPoint(center);
 		return cameraPoint.x >= 0 && cameraPoint.x <= 1 && cameraPoint.y >= 0 && cameraPoint.y <= 1;
+	}
+
+	public bool IsClose() {
+		Vector3 distance = transform.position - GameObject.FindGameObjectWithTag("Player").transform.position;
+		return distance.magnitude <= 20;
 	}
 }
