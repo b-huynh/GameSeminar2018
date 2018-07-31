@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoadScript : MonoBehaviour {
 
     private bool goalEntered;
+    public GameObject winnerLabelObject;
 
 	//　スタートボタンを押したら実行する
 	public void GameStart() {
@@ -16,7 +17,8 @@ public class SceneLoadScript : MonoBehaviour {
         {
             if (goalEntered)
             {
-                SceneManager.LoadScene("Portal1");
+                //SceneManager.LoadScene("Portal1");
+                winnerLabelObject.SetActive (true);
             }
         }
     }
